@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.doctor.mokhtari.scanner_doc">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="whateverString"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:appComponentFactory">
+        <activity android:name="com.doctor.mokhtari.scanner_doc.activities.test">
+
+        </activity>
+
+        <activity android:name="com.doctor.mokhtari.scanner_doc.activities.Main"></activity>
+        <activity android:name="com.doctor.mokhtari.scanner_doc.activities.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.doctor.mokhtari.scanner_doc.activities.Mainskin"
+            android:label="@string/title_activity_main" />
+        <activity android:name="com.doctor.mokhtari.scanner_doc.activities.BodyPart.BodyMain" />
+        <activity android:name="com.doctor.mokhtari.scanner_doc.activities.walkthrough.WalkthroughStyle3Activity"></activity>
+        <activity android:name="com.doctor.mokhtari.scanner_doc.activities.questioner.question" />
+        <activity android:name="com.doctor.mokhtari.scanner_doc.activities.SignupActivity" />
+        <activity android:name="com.doctor.mokhtari.scanner_doc.activities.New_request.select_photo.ImagePickerActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+<activity android:name="com.doctor.mokhtari.scanner_doc.activities.imageSampleActivity"></activity>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
+
+</manifest>

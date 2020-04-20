@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:chatview="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar" android:id="@+id/toolbar"></include>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#929292"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="اتمام گفتگو"
+            android:textColor="#FFFFFF"
+            android:drawableTint="#D6D6D6"
+            android:drawableRight="@drawable/power"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="15dp"
+            />
+
+        <View
+            android:id="@+id/view"
+
+            android:layout_width="1dp"
+            android:layout_height="38dp"
+
+
+            android:background="#D6D6D6" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="تصویر مجدد"
+            android:textColor="#FFFFFF"
+            android:drawableTint="#D6D6D6"
+            android:drawableRight="@drawable/effects"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="15dp"
+            />
+
+        <View
+            android:id="@+id/view"
+
+            android:layout_width="1dp"
+            android:layout_height="38dp"
+
+
+
+            android:background="#D6D6D6" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/writing"
+            android:gravity="center"
+            android:text="پرونده"
+android:drawableTint="#D6D6D6"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+          android:textSize="15dp"
+            android:textColor="#FFFFFF" />
+    </TableRow>
+
+    <co.intentservice.chatui.ChatView
+        android:id="@+id/chat_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        chatview:backgroundColor="@color/off_white"
+        app:bubbleBackgroundSend="#F1F1F1"
+        app:bubbleElevation="flat"
+
+        app:inputHint="پیام خود را بنویسید..."
+        app:bubbleBackgroundRcv="@color/allOkButton"
+        app:sendBtnIconTint="#ffffff"
+app:sendBtnBackgroundTint="@color/allOkButton"
+         />
+</LinearLayout>

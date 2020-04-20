@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "666867630887",
+    "firebase_url": "https://scanner-doc-82e48.firebaseio.com",
+    "project_id": "scanner-doc-82e48",
+    "storage_bucket": "scanner-doc-82e48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666867630887:android:c38236529d9836da3b9f02",
+        "android_client_info": {
+          "package_name": "com.doctor.mokhtari.scanner_doc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666867630887-kavbcopqs8b97a1n0paok9jlesj8h5up.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6FNPkgzgLyBHkD-NX7Q1YzRAj5eidHvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666867630887-kavbcopqs8b97a1n0paok9jlesj8h5up.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
