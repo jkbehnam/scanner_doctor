@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.doctor.mokhtari.scanner_doc.R;
-import com.doctor.mokhtari.scanner_doc.activities.Objects.requests;
+import com.doctor.mokhtari.scanner_doc.activities.Objects.Request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +23,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.doctor.mokhtari.scanner_doc.activities.utils.Utils.getPersianDate;
+
 
 /**
  * Created by behnam_b on 7/5/2016.
  */
 public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.MyViewHolder> {
-    private List<requests> data_services_list;
+    private List<Request> data_services_list;
 
     Context context;
     OnCardClickListner onCardClickListner;
@@ -59,7 +61,7 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
     }
 
 
-    public adapterRcycleMain2(ArrayList<requests> data_services_list) {
+    public adapterRcycleMain2(ArrayList<Request> data_services_list) {
         this.data_services_list = data_services_list;
     }
 
@@ -75,30 +77,35 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
     @SuppressLint("ResourceType")
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final requests data_service = data_services_list.get(position);
+        final Request data_service = data_services_list.get(position);
 
-        holder.tv_reqiest_bodypart.setText(data_service.getReqiest_bodypart());
-        holder.tv_request_doctor.setText(data_service.getRequest_doctor());
+        holder.tv_reqiest_bodypart.setText("bodypart");
+        holder.tv_request_doctor.setText(data_service.getRequest_patient());
         holder.tv_request_state.setText(data_service.getRequest_state());
-        holder.tv_request_date.setText(data_service.getRequest_date());
+        holder.tv_request_date.setText(getPersianDate(data_service.getRequest_date()));
 
-        if (data_service.getRequest_state().equals("تشخیص ارسال شده")) {
+    /*    if (data_service.getRequest_state().equals("تشخیص ارسال شده")) {
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.correctItem));
         } else if (data_service.getRequest_state().equals("درخواست جدید")) {
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.button_magenta));
         } else {
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.allOkButton));
             holder.cv_request.setCardBackgroundColor(ContextCompat.getColor(context, R.color.grey_20));
-        }
+        }*/
 
         Typeface typeface3 = Typeface.createFromAsset(context.getAssets(), "font/iran_sans.ttf");
         holder.tv_request_state.setTypeface(typeface3, Typeface.BOLD);
 
-        Glide.with(context).load(getImage(data_service.getRequest_img())).into(holder.iv_requet);
+
+        Glide.with(context)
+                .load(data_service.getRequest_img())
+                .thumbnail(.005f)
+                .into(holder.iv_requet);
         holder.cv_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onCardClickListner.OnCardClicked(v, position);
+                onCardClickListner.OnCardClicked(v, position, data_service);
+
             }
         });
 
@@ -110,7 +117,7 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
     }
 
     public interface OnCardClickListner {
-        void OnCardClicked(View view, int position);
+        void OnCardClicked(View view, int position, Request req);
     }
 
     public void setOnCardClickListner(OnCardClickListner onCardClickListner) {

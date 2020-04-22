@@ -31,7 +31,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterAddPhoto;
 import com.doctor.mokhtari.scanner_doc.activities.CustomItems.RtlGridLayoutManager;
-import com.doctor.mokhtari.scanner_doc.activities.CustomItems.myFragment;
+import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
 import com.doctor.mokhtari.scanner_doc.activities.New_request.select_photo.ImagePickerActivity;
 import com.doctor.mokhtari.scanner_doc.activities.Objects.AddImage;
 import com.doctor.mokhtari.scanner_doc.activities.camera_tips.camera_tips_main;

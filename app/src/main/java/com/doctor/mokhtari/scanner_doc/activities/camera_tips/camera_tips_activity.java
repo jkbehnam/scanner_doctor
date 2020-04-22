@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.doctor.mokhtari.scanner_doc.R;
-import com.doctor.mokhtari.scanner_doc.activities.BaseActivity;
-import com.doctor.mokhtari.scanner_doc.activities.LoginActivity;
+import com.doctor.mokhtari.scanner_doc.activities.base.BaseActivity;
+import com.doctor.mokhtari.scanner_doc.activities.LoginRegistration.login.LoginActivity;
 import com.doctor.mokhtari.scanner_doc.activities.SignupActivity;
 import com.doctor.mokhtari.scanner_doc.activities.walkthrough.WalkthroughStyle3Fragment;
 

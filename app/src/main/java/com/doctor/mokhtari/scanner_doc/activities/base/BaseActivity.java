@@ -1,4 +1,4 @@
-package com.doctor.mokhtari.scanner_doc.activities;
+package com.doctor.mokhtari.scanner_doc.activities.base;
 
 import android.annotation.TargetApi;
 import android.content.Context;

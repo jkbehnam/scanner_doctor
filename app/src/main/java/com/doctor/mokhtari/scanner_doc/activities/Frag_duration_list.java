@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterdurationList;
-import com.doctor.mokhtari.scanner_doc.activities.CustomItems.myFragment;
+import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
 import com.doctor.mokhtari.scanner_doc.activities.Objects.Duration;
 
 import java.util.ArrayList;

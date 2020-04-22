@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.doctor.mokhtari.scanner_doc.R;
-import com.doctor.mokhtari.scanner_doc.activities.CustomItems.myFragment;
+import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
 
 import butterknife.ButterKnife;
 

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.doctor.mokhtari.scanner_doc.R;
-import com.doctor.mokhtari.scanner_doc.activities.CustomItems.myFragment;
+import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
 
 import java.util.ArrayList;
 

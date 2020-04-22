@@ -3,20 +3,23 @@ package com.doctor.mokhtari.scanner_doc.activities;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
 
 import com.doctor.mokhtari.scanner_doc.R;
-import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterRcycleMain;
-import com.doctor.mokhtari.scanner_doc.activities.CustomItems.myFragment;
-import com.doctor.mokhtari.scanner_doc.activities.New_request.AddTestPhoto;
-import com.doctor.mokhtari.scanner_doc.activities.Objects.MainList;
+import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterPatientDetails;
+import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterQuestionDetails;
+import com.doctor.mokhtari.scanner_doc.activities.Objects.ReqQuestions;
+import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -24,20 +27,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class Frag_new_request extends myFragment implements View.OnClickListener{
-
+public class Frag_questions_details extends myFragment implements View.OnClickListener{
+    JSONObject jsonObject;
     private OnFragmentInteractionListener mListener;
-
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
 
     // TODO: Rename and change types and number of parameters
-    public static Frag_new_request newInstance() {
-        Frag_new_request fragment = new Frag_new_request();
+    public static Frag_questions_details newInstance(JSONObject jsonObject) {
+        Frag_questions_details fragment = new Frag_questions_details( jsonObject);
 
         return fragment;
     }
-
+public Frag_questions_details(JSONObject jsonObject){
+        this.jsonObject=jsonObject;
+}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +50,10 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView= inflater.inflate(R.layout.fragment_new_request, container, false);
+        View rootView= inflater.inflate(R.layout.fragment_questions_details, container, false);
         ButterKnife.bind(this, rootView);
         setFragmentActivity(getActivity());
-        setToolbar_notmain(rootView,"درخواست جدید");
+        setToolbar_notmain(rootView,"سوالات پاسخ داده شده");
 
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
@@ -62,45 +66,29 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
 
 
         mainActivity_recycle.setLayoutManager(layoutManager);
-        ArrayList<MainList> glist = new ArrayList<>();
-        glist.add(new MainList("انتخاب محل ضایعه", "transaction", true));
-        glist.add(new MainList("پاسخ به سوالات", "transaction", false));
-        glist.add(new MainList("ارسال تصویر آزمایش", "solved", false));
-        glist.add(new MainList("ارسال تصویر ضایعه", "wallet", false));
-        glist.add(new MainList("انتخاب پزشک", "transaction", false));
+        ArrayList<ReqQuestions> glist = new ArrayList<>();
+        try {
+            glist.add(new ReqQuestions(jsonObject.getString("1q_a"), jsonObject.getString("1q_b")));
+            glist.add(new ReqQuestions(jsonObject.getString("2q_a"), jsonObject.getString("2q_b")));
+            glist.add(new ReqQuestions(jsonObject.getString("3q_a"), jsonObject.getString("3q_b")));
+            glist.add(new ReqQuestions(jsonObject.getString("4q_a"),jsonObject.getString("4q_b")));
+            glist.add(new ReqQuestions(jsonObject.getString("5q_a"),jsonObject.getString("5q_b")));
+            glist.add(new ReqQuestions(jsonObject.getString("6q_a"),jsonObject.getString("6q_b")));
+            glist.add(new ReqQuestions(jsonObject.getString("7q_a"),jsonObject.getString("7q_b")));
+            glist.add(new ReqQuestions(jsonObject.getString("8q_a"),jsonObject.getString("8q_b")));
+            glist.add(new ReqQuestions(jsonObject.getString("9q_a"),jsonObject.getString("9q_b")));
+            glist.add(new ReqQuestions(jsonObject.getString("10q_a"),jsonObject.getString("10q_b")));
 
-        adapterRcycleMain madapter = new adapterRcycleMain(glist);
+        }catch (Exception e){}
+
+
+        adapterQuestionDetails madapter = new adapterQuestionDetails(glist);
         mainActivity_recycle.setAdapter(madapter);
 
-        madapter.setOnCardClickListner(new adapterRcycleMain.OnCardClickListner() {
+        madapter.setOnCardClickListner(new adapterQuestionDetails.OnCardClickListner() {
             @Override
             public void OnCardClicked(View view, int position) {
 
-                switch (position) {
-                    case 0:
-                       // Intent i=new Intent(getActivity(), BodyMain.class);
-                       /// startActivity(i);
-                           loadFragment(new Frag_Body_part());
-                        break;
-                    case 1:
-                      //  Intent i2=new Intent(getActivity(), question.class);
-                      //  startActivity(i2);
-
-                        loadFragment(Frag_Question_list.newInstance());
-                        break;
-                    case 2:
-                        loadFragment(AddTestPhoto.newInstance());
-
-                        break;
-                    case 3:
-
-                        //  loadFragment(new Fragment_ranking_list());
-                        break;
-                    case 4:
-                        loadFragment(Frag_doctor_list.newInstance());
-                        // loadFragment(new Fragment_source_list());
-                        break;
-                }
             }
         });
 
@@ -139,9 +127,7 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.acount_btn:
 
-                break;
 
 
         }

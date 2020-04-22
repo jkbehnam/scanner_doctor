@@ -11,8 +11,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
 import com.doctor.mokhtari.scanner_doc.R;
-import com.doctor.mokhtari.scanner_doc.activities.BaseActivity;
-import com.doctor.mokhtari.scanner_doc.activities.LoginActivity;
+import com.doctor.mokhtari.scanner_doc.activities.base.BaseActivity;
+import com.doctor.mokhtari.scanner_doc.activities.LoginRegistration.login.LoginActivity;
 import com.doctor.mokhtari.scanner_doc.activities.SignupActivity;
 
 

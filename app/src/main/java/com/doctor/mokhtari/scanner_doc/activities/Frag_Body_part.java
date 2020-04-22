@@ -22,7 +22,7 @@ import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.BodyPart.region.RegionView;
 import com.doctor.mokhtari.scanner_doc.activities.BodyPart.view.HumanBodyWidget;
 import com.doctor.mokhtari.scanner_doc.activities.BodyPart.view.WaveEffectLayout;
-import com.doctor.mokhtari.scanner_doc.activities.CustomItems.myFragment;
+import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
 
 import java.util.ArrayList;
 

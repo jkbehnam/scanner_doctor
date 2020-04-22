@@ -9,6 +9,7 @@ import android.view.View;
 import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterRcycleMain;
 import com.doctor.mokhtari.scanner_doc.activities.Objects.MainList;
+import com.doctor.mokhtari.scanner_doc.activities.base.BaseActivity;
 import com.doctor.mokhtari.scanner_doc.activities.questioner.question;
 
 import java.util.ArrayList;

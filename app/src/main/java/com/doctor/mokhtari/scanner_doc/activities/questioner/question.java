@@ -11,7 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.doctor.mokhtari.scanner_doc.R;
-import com.doctor.mokhtari.scanner_doc.activities.BaseActivity;
+import com.doctor.mokhtari.scanner_doc.activities.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -3,6 +3,7 @@ package com.doctor.mokhtari.scanner_doc.activities;
 import android.os.Bundle;
 
 import com.doctor.mokhtari.scanner_doc.R;
+import com.doctor.mokhtari.scanner_doc.activities.base.BaseActivity;
 
 public class test extends BaseActivity {
 

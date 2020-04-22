@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import android.widget.TextView;
 
+import com.doctor.mokhtari.scanner_doc.activities.base.BaseActivity;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.doctor.mokhtari.scanner_doc.R;
 

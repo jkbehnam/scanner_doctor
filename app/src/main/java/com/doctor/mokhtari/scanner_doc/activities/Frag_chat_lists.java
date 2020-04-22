@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterChatList;
-import com.doctor.mokhtari.scanner_doc.activities.CustomItems.myFragment;
-import com.doctor.mokhtari.scanner_doc.activities.Objects.requests;
+import com.doctor.mokhtari.scanner_doc.activities.Objects.Request;
+import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
 
 import java.util.ArrayList;
 
@@ -63,10 +63,10 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
         mainActivity_recycle.setLayoutManager(layoutManager);
-        ArrayList<requests> glist = new ArrayList<>();
-        glist.add(new requests("پشت دست", "97/3/2", "حسن حسن زاده", "2", "hand"));
-        glist.add(new requests("پشت شانه", "97/3/3", "حمید میرزایی", "1", "sholder"));
-        glist.add(new requests("پشت شانه", "97/3/3", "کامران جعفری", "3", "sholder"));
+        ArrayList<Request> glist = new ArrayList<>();
+        glist.add(new Request("پشت دست", "97/3/2", "حسن حسن زاده", "2", "hand"));
+        glist.add(new Request("پشت شانه", "97/3/3", "حمید میرزایی", "1", "sholder"));
+        glist.add(new Request("پشت شانه", "97/3/3", "کامران جعفری", "3", "sholder"));
 
         // glist.add(new requests("پشت دست", "97/3/2", "دکتر یوسفی", "دریافت پاسخ", "transaction"));
 
@@ -83,7 +83,7 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
         }
     }
 
-    public void settitems(ArrayList<requests> glist) {
+    public void settitems(ArrayList<Request> glist) {
         if (glist.size() != 0) {
             tv_empty_state.setVisibility(View.GONE);
             iv_empty_state.setVisibility(View.GONE);

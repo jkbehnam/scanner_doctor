@@ -1,4 +1,4 @@
-package com.doctor.mokhtari.scanner_doc.activities.CustomItems;
+package com.doctor.mokhtari.scanner_doc.activities.base;
 
 import android.graphics.Typeface;
 import android.view.View;
