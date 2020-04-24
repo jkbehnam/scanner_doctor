@@ -1,6 +1,7 @@
 package com.doctor.mokhtari.scanner_doc.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -19,6 +21,7 @@ import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterRcycleMain2;
 import com.doctor.mokhtari.scanner_doc.activities.Objects.Request;
 import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
+import com.doctor.mokhtari.scanner_doc.activities.helper.PrefManager;
 import com.doctor.mokhtari.scanner_doc.activities.webservice.ConnectToServer;
 import com.doctor.mokhtari.scanner_doc.activities.webservice.VolleyCallback;
 import com.google.gson.Gson;
@@ -97,11 +100,19 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
             settitems(requests);
         }
          View myLayout = rootView.findViewById(R.id.toolbar); // root View id from that link
-        ImageView myView = (ImageView) myLayout.findViewById(R.id.iv_chat);
-        myView.setOnClickListener(new View.OnClickListener() {
+        ImageView IvChat = (ImageView) myLayout.findViewById(R.id.iv_chat);
+        IvChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loadFragment(Frag_chat_lists.newInstance());
+            }
+        });
+        ImageView IvProfile = (ImageView) myLayout.findViewById(R.id.iv_profile);
+        IvProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(view, new String[]{ "خروج"}, "");
+
             }
         });
         return rootView;
@@ -204,5 +215,25 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
 
         });
 
+    }
+    private void showDialog(final View view, CharSequence[] charSequenceArr, String title) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title);
+        builder.setSingleChoiceItems(charSequenceArr, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                switch (i){
+                    case 0:
+                        PrefManager pm = new PrefManager(getActivity());
+                        pm.clearSession();
+                        getActivity().finish();
+                        break;
+                }
+
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.show();
     }
 }

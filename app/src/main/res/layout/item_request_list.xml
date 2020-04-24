@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:foregroundGravity="center"
+    android:layout_height="100dp"
 
-    android:layout_height="100dp">
+    android:foregroundGravity="center">
 
     <View
         android:layout_width="fill_parent"
-android:layout_marginRight="18dp"
-        android:layout_marginLeft="18dp"
         android:layout_height="1dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:background="#32C0C0C0"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints" />
@@ -20,10 +20,10 @@ android:layout_marginRight="18dp"
         android:id="@+id/cv_request"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:foreground="?android:attr/selectableItemBackground"
-android:layout_marginLeft="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/background"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,13 +37,13 @@ android:layout_marginLeft="10dp"
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:clipToPadding="false"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:clipToPadding="false"
                 android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:weightSum="2"
                 app:layout_constraintEnd_toStartOf="@+id/cardView2"
                 app:layout_constraintStart_toStartOf="parent">
@@ -58,20 +58,20 @@ android:layout_marginLeft="10dp"
                         android:id="@+id/tv_request_date"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/text_color_all"
-
                         android:layout_weight="1"
+
                         android:gravity="right|center_vertical"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textColor="@color/text_color_all" />
 
                     <TextView
                         android:id="@+id/tv_reqiest_bodypart"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-android:textColor="@color/text_color_all"
                         android:layout_weight="1"
                         android:gravity="right|center_vertical"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textColor="@color/text_color_all" />
 
                 </TableRow>
 
@@ -85,20 +85,20 @@ android:textColor="@color/text_color_all"
                         android:id="@+id/tv_request_state"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-android:textColor="@color/allOkButton"
                         android:layout_weight="1"
                         android:gravity="right|center_vertical"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textColor="@color/allOkButton" />
 
                     <TextView
                         android:id="@+id/tv_request_doctor"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/text_color_all"
-
                         android:layout_weight="1"
+
                         android:gravity="right|center_vertical"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textColor="@color/text_color_all" />
                 </TableRow>
             </LinearLayout>
 
@@ -113,8 +113,8 @@ android:textColor="@color/allOkButton"
                 android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="@color/second_color"
                 app:cardCornerRadius="8dp"
-                app:elevation="0dp"
                 app:cardElevation="0dp"
+                app:elevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"

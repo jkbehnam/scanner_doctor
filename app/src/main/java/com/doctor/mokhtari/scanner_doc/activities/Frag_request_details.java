@@ -19,6 +19,7 @@ import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterShowPhoto;
 import com.doctor.mokhtari.scanner_doc.activities.CustomItems.RtlGridLayoutManager;
 import com.doctor.mokhtari.scanner_doc.activities.Objects.AddImage;
 import com.doctor.mokhtari.scanner_doc.activities.Objects.BodyPointMain;
+import com.doctor.mokhtari.scanner_doc.activities.Objects.Patient;
 import com.doctor.mokhtari.scanner_doc.activities.Objects.Request;
 import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
 import com.doctor.mokhtari.scanner_doc.activities.webservice.ConnectToServer;
@@ -71,7 +72,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     Request request;
     JSONObject jsonObject;
     public static ArrayList<BodyPointMain> reqBodyPoints2 = new ArrayList<>();
-
+public static Patient patient;
     // TODO: Rename and change types and number of parameters
     public Frag_request_details(Request RequestId) {
         this.request = RequestId;
@@ -106,6 +107,8 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         pat_det_tv.setOnClickListener(this::onClick);
         tv_body_part.setOnClickListener(this::onClick);
         ReqQuestions.setOnClickListener(this);
+        ReqChat.setOnClickListener(this);
+
         return rootView;
     }
 
@@ -152,6 +155,10 @@ public class Frag_request_details extends myFragment implements View.OnClickList
                 break;
             case R.id.ReqQuestions:
                 loadFragment(Frag_questions_details.newInstance(jsonObject));
+                break;
+            case R.id.ReqChat:
+                loadFragment(Frag_chat_ui.newInstance(request));
+                break;
         }
     }
 
@@ -197,12 +204,16 @@ public class Frag_request_details extends myFragment implements View.OnClickList
             bodyphotos.addAll(Arrays.asList(request));
             request = gson.fromJson(obj.getString("testphotos"), AddImage[].class);
             testphotos.addAll(Arrays.asList(request));
+
             JSONArray ja = obj.getJSONArray("questions");
             if (ja.length() != 0)
                 jsonObject = (JSONObject) ja.get(0);
             reqBodyPoints2.clear();
             BodyPointMain[] request2 = gson.fromJson(obj.getString("bodypoints"), BodyPointMain[].class);
             reqBodyPoints2.addAll(Arrays.asList(request2));
+            patient=null;
+             patient = gson.fromJson(obj.getString("patient"), Patient.class);
+           // JSONObject patient= obj.getJSONObject("patient");
         } catch (Exception e) {
         }
         settitems(bodyphotos, testphotos);

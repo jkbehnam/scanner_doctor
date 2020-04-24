@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterPatientDetails;
 import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
-import com.doctor.mokhtari.scanner_doc.activities.Objects.Patient_detail;
+import com.doctor.mokhtari.scanner_doc.activities.Objects.ItemList;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.doctor.mokhtari.scanner_doc.activities.Frag_request_details.patient;
 
 
 public class Frag_patient_details extends myFragment implements View.OnClickListener{
@@ -61,11 +63,11 @@ public class Frag_patient_details extends myFragment implements View.OnClickList
 
 
         mainActivity_recycle.setLayoutManager(layoutManager);
-        ArrayList<Patient_detail> glist = new ArrayList<>();
-        glist.add(new Patient_detail("حسن حسن زاده", "(مرد)"));
-        glist.add(new Patient_detail("سن", "48/3/7   (50)"));
-        glist.add(new Patient_detail("محل زندگی", "خراسان رضوی_مشهد"));
-        glist.add(new Patient_detail("تعداد درخواست ها", "10"));
+        ArrayList<ItemList> glist = new ArrayList<>();
+        glist.add(new ItemList(patient.getName(), "("+patient.getGender()+")"));
+        glist.add(new ItemList("سن", patient.getBday()));
+        glist.add(new ItemList("محل زندگی", patient.getAddress()));
+     //   glist.add(new ItemList("تعداد درخواست ها", "10"));
 
         adapterPatientDetails madapter = new adapterPatientDetails(glist);
         mainActivity_recycle.setAdapter(madapter);

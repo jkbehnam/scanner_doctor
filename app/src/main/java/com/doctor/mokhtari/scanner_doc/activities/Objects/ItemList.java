@@ -1,9 +1,16 @@
 package com.doctor.mokhtari.scanner_doc.activities.Objects;
 
-public class Patient_detail {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class ItemList {
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("content")
+    @Expose
     private String content;
-public Patient_detail(String title, String content){
+public ItemList(String title, String content){
     this.title=title;
     this.content=content;
 }

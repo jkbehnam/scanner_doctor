@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterPatientDetails;
 import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
-import com.doctor.mokhtari.scanner_doc.activities.Objects.Patient_detail;
+import com.doctor.mokhtari.scanner_doc.activities.Objects.ItemList;
 
 import java.util.ArrayList;
 
@@ -61,11 +61,11 @@ public class Frag_chat_list extends myFragment implements View.OnClickListener{
 
 
         mainActivity_recycle.setLayoutManager(layoutManager);
-        ArrayList<Patient_detail> glist = new ArrayList<>();
-        glist.add(new Patient_detail("حسن حسن زاده", "(مرد)"));
-        glist.add(new Patient_detail("سن", "48/3/7   (50)"));
-        glist.add(new Patient_detail("محل زندگی", "خراسان رضوی_مشهد"));
-        glist.add(new Patient_detail("تعداد درخواست ها", "10"));
+        ArrayList<ItemList> glist = new ArrayList<>();
+        glist.add(new ItemList("حسن حسن زاده", "(مرد)"));
+        glist.add(new ItemList("سن", "48/3/7   (50)"));
+        glist.add(new ItemList("محل زندگی", "خراسان رضوی_مشهد"));
+        glist.add(new ItemList("تعداد درخواست ها", "10"));
 
         adapterPatientDetails madapter = new adapterPatientDetails(glist);
         mainActivity_recycle.setAdapter(madapter);

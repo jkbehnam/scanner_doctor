@@ -79,8 +79,8 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Request data_service = data_services_list.get(position);
 
-        holder.tv_reqiest_bodypart.setText("bodypart");
-        holder.tv_request_doctor.setText(data_service.getRequest_patient());
+        holder.tv_reqiest_bodypart.setText(data_service.getRequest_patient());
+        holder.tv_request_doctor.setVisibility(View.INVISIBLE);
         holder.tv_request_state.setText(data_service.getRequest_state());
         holder.tv_request_date.setText(getPersianDate(data_service.getRequest_date()));
 

@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.Adapters.adapterChatList;
 import com.doctor.mokhtari.scanner_doc.activities.Objects.Request;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.doctor.mokhtari.scanner_doc.activities.Frag_request_list.requests;
 
 
 public class Frag_chat_lists extends myFragment implements View.OnClickListener {
@@ -57,20 +60,17 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
         ButterKnife.bind(this, rootView);
 
         setFragmentActivity(getActivity());
-        setToolbar(rootView, "لیست پیام ها");
+        setToolbar_notmain(rootView, "ارتباط با پزشک");
+
         //  ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         //   ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
         mainActivity_recycle.setLayoutManager(layoutManager);
-        ArrayList<Request> glist = new ArrayList<>();
-        glist.add(new Request("پشت دست", "97/3/2", "حسن حسن زاده", "2", "hand"));
-        glist.add(new Request("پشت شانه", "97/3/3", "حمید میرزایی", "1", "sholder"));
-        glist.add(new Request("پشت شانه", "97/3/3", "کامران جعفری", "3", "sholder"));
 
         // glist.add(new requests("پشت دست", "97/3/2", "دکتر یوسفی", "دریافت پاسخ", "transaction"));
 
-        settitems(glist);
+        settitems(requests);
 
 
         return rootView;
@@ -94,7 +94,7 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
             @Override
             public void OnCardClicked(View view, int position) {
 
-loadFragment(Frag_chat_ui.newInstance());
+                loadFragment(Frag_chat_ui.newInstance(glist.get(position)));
                 // Intent i=new Intent(Mainskin.this, question.class);
                 //startActivity(i);
                 //   loadFragment(new BuyQuestionFragment());
@@ -130,9 +130,7 @@ loadFragment(Frag_chat_ui.newInstance());
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.acount_btn:
 
-                break;
             case R.id.btnNewRequest:
 
                 break;
@@ -147,4 +145,6 @@ loadFragment(Frag_chat_ui.newInstance());
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+
 }

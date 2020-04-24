@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doctor.mokhtari.scanner_doc.R;
-import com.doctor.mokhtari.scanner_doc.activities.Objects.Patient_detail;
+import com.doctor.mokhtari.scanner_doc.activities.Objects.ItemList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  * Created by behnam_b on 7/5/2016.
  */
 public class adapterPatientDetails extends RecyclerView.Adapter<adapterPatientDetails.MyViewHolder> {
-    private List<Patient_detail> data_services_list;
+    private List<ItemList> data_services_list;
 
     Context context;
     OnCardClickListner onCardClickListner;
@@ -49,7 +49,7 @@ TextView item_datail;
     }
 
 
-    public adapterPatientDetails(ArrayList<Patient_detail> data_services_list) {
+    public adapterPatientDetails(ArrayList<ItemList> data_services_list) {
         this.data_services_list = data_services_list;
     }
 
@@ -65,7 +65,7 @@ TextView item_datail;
     @SuppressLint("ResourceType")
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final Patient_detail data_service = data_services_list.get(position);
+        final ItemList data_service = data_services_list.get(position);
 
         holder.item_name.setText(data_service.getTitle());
         holder.item_datail.setText(data_service.getContent());

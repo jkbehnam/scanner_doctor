@@ -41,6 +41,15 @@
             >
 
         </TextView>
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:tint="@color/allOkButton"
+            app:layout_constraintEnd_toEndOf="@+id/txttoolbar"
+            app:srcCompat="@drawable/name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.appcompat.widget.Toolbar>
