@@ -24,8 +24,28 @@ public class Request {
     @SerializedName("patient")
     @Expose
     private String request_patient;
+    @SerializedName("diagnosis")
+    @Expose
+    private String diagnosis;
+    @SerializedName("treatment")
+    @Expose
+    private String treatment;
 
+    public String getDiagnosis() {
+        return diagnosis;
+    }
 
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
+    }
 
     @SerializedName("user_id")
     @Expose

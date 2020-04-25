@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.Objects.Request;
+import com.doctor.mokhtari.scanner_doc.activities.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,17 +82,17 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
 
         holder.tv_reqiest_bodypart.setText(data_service.getRequest_patient());
         holder.tv_request_doctor.setVisibility(View.INVISIBLE);
-        holder.tv_request_state.setText(data_service.getRequest_state());
+        holder.tv_request_state.setText(Utils.getRequestState(data_service.getRequest_state()));
         holder.tv_request_date.setText(getPersianDate(data_service.getRequest_date()));
 
-    /*    if (data_service.getRequest_state().equals("تشخیص ارسال شده")) {
+        if (data_service.getRequest_state().equals("answerd")) {
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.correctItem));
-        } else if (data_service.getRequest_state().equals("درخواست جدید")) {
+        } else if (data_service.getRequest_state().equals("progress")) {
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.button_magenta));
-        } else {
+        } else if (data_service.getRequest_state().equals("encchat")) {
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.allOkButton));
             holder.cv_request.setCardBackgroundColor(ContextCompat.getColor(context, R.color.grey_20));
-        }*/
+        }
 
         Typeface typeface3 = Typeface.createFromAsset(context.getAssets(), "font/iran_sans.ttf");
         holder.tv_request_state.setTypeface(typeface3, Typeface.BOLD);

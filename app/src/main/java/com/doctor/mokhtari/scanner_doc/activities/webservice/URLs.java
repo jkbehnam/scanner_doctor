@@ -10,7 +10,7 @@ public class URLs {
     public static final String URL_GET_REQUEST_DETAIL=site +"/include/scanner_get_request_detail.php";
     public static final String URL_SEND_CHAT=site +"/include/scanner_send_chat.php";
     public static final String URL_GET_CHAT=site +"/include/scanner_chat_get.php";
-    public static final String URL_SIGNUP=site +"/include/scanner_signup.php";
-
+    public static final String URL_SEND_DIAGNOSIS=site +"/include/scanner_doc_diagnosis.php";
+    public static final String URL_END_CHAT=site +"/include/scanner_doc_endchat.php";
 
 }

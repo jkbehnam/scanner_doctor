@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.doctor.mokhtari.scanner_doc.activities.webservice.URLs.URL_GET_REQUEST_DETAIL;
+import static com.doctor.mokhtari.scanner_doc.activities.webservice.URLs.URL_SEND_DIAGNOSIS;
 import static com.yalantis.ucrop.UCropFragment.TAG;
 
 
@@ -67,12 +70,16 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     TextView ReqQuestions;
     @BindView(R.id.ReqDate)
     TextView ReqDate;
-
+    @BindView(R.id.ReqDiagnosis)
+    EditText ReqDiagnosis;
+    @BindView(R.id.ReqTreatment)
+    EditText ReqTreatment;
     int position;
     Request request;
     JSONObject jsonObject;
     public static ArrayList<BodyPointMain> reqBodyPoints2 = new ArrayList<>();
-public static Patient patient;
+    public static Patient patient;
+
     // TODO: Rename and change types and number of parameters
     public Frag_request_details(Request RequestId) {
         this.request = RequestId;
@@ -108,7 +115,17 @@ public static Patient patient;
         tv_body_part.setOnClickListener(this::onClick);
         ReqQuestions.setOnClickListener(this);
         ReqChat.setOnClickListener(this);
+        ReqDiagnosis.setText(request.getDiagnosis());
+        ReqTreatment.setText(request.getTreatment());
 
+        View myLayout = rootView.findViewById(R.id.toolbar); // root View id from that link
+        ImageView IcSubmit = (ImageView) myLayout.findViewById(R.id.iv_submit);
+        IcSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendDiagnosis(ReqDiagnosis.getText().toString(), ReqTreatment.getText().toString());
+            }
+        });
         return rootView;
     }
 
@@ -210,9 +227,9 @@ public static Patient patient;
             reqBodyPoints2.clear();
             BodyPointMain[] request2 = gson.fromJson(obj.getString("bodypoints"), BodyPointMain[].class);
             reqBodyPoints2.addAll(Arrays.asList(request2));
-            patient=null;
-             patient = gson.fromJson(obj.getString("patient"), Patient.class);
-           // JSONObject patient= obj.getJSONObject("patient");
+            patient = null;
+            patient = gson.fromJson(obj.getString("patient"), Patient.class);
+            // JSONObject patient= obj.getJSONObject("patient");
         } catch (Exception e) {
         }
         settitems(bodyphotos, testphotos);
@@ -248,4 +265,22 @@ public static Patient patient;
                 shortAnswerAlert.show();
             }
         });
-    }}
+
+
+    }
+
+    public void sendDiagnosis(String diagnosis, String treatment) {
+        showLoading_base();
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("request_key", request.getRequest_id());
+        param.put("diagnosis", diagnosis);
+        param.put("treatment", treatment);
+        ConnectToServer.any_send(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) throws JSONException {
+                hideLoading_base();
+                reciveRequest(result);
+            }
+        }, param, URL_SEND_DIAGNOSIS);
+    }
+}

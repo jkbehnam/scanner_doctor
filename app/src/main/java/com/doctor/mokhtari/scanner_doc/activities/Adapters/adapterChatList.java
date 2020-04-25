@@ -16,11 +16,14 @@ import com.bumptech.glide.Glide;
 import com.doctor.mokhtari.scanner_doc.R;
 import com.doctor.mokhtari.scanner_doc.activities.Objects.Request;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.doctor.mokhtari.scanner_doc.activities.utils.Utils.getPersianDate;
 
 
 /**
@@ -76,16 +79,18 @@ public class adapterChatList extends RecyclerView.Adapter<adapterChatList.MyView
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Request data_service = data_services_list.get(position);
 
-       // holder.tv_reqiest_bodypart.setText(data_service.getReqiest_bodypart());
-       // holder.tv_request_doctor.setText(data_service.getRequest_doctor());
-        holder.tv_request_state.setText(data_service.getRequest_state());
-        holder.tv_request_date.setText(data_service.getRequest_date());
+
+        holder.tv_reqiest_bodypart.setText(data_service.getRequest_patient());
+        holder.tv_request_doctor.setText("");
+        // holder.tv_request_state.setText(data_service.getRequest_state());
+        holder.tv_request_state.setVisibility(View.GONE);
+        holder.tv_request_date.setText(getPersianDate(data_service.getRequest_date()));
 
 
         Typeface typeface3 = Typeface.createFromAsset(context.getAssets(), "font/iran_sans.ttf");
         holder.tv_request_state.setTypeface(typeface3, Typeface.BOLD);
 
-        Glide.with(context).load(getImage(data_service.getRequest_img())).into(holder.iv_requet);
+        Glide.with(context).load(data_service.getRequest_img()).into(holder.iv_requet);
         holder.cv_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

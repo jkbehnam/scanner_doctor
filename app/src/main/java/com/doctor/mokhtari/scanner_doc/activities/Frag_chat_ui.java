@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -33,8 +35,10 @@ import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.models.ChatMessage;
 import static com.doctor.mokhtari.scanner_doc.activities.Main.user_id;
 import static com.doctor.mokhtari.scanner_doc.activities.utils.Utils.getTimeStamp;
+import static com.doctor.mokhtari.scanner_doc.activities.webservice.URLs.URL_END_CHAT;
 import static com.doctor.mokhtari.scanner_doc.activities.webservice.URLs.URL_GET_CHAT;
 import static com.doctor.mokhtari.scanner_doc.activities.webservice.URLs.URL_SEND_CHAT;
+import static com.doctor.mokhtari.scanner_doc.activities.webservice.URLs.URL_SEND_DIAGNOSIS;
 
 
 public class Frag_chat_ui extends myFragment implements View.OnClickListener {
@@ -43,6 +47,8 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
     Request request;
     @BindView(R.id.chat_view)
     ChatView chatView;
+    @BindView(R.id.iv_end_chat)
+    TextView iv_end_chat;
     ArrayList<ChatMessage> chat_list;
 
     // TODO: Rename and change types and number of parameters
@@ -68,7 +74,7 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
         ButterKnife.bind(this, rootView);
         setFragmentActivity(getActivity());
         setToolbar_notmain(rootView, "ارتباط با "+request.getRequest_patient());
-
+        iv_end_chat.setOnClickListener(this);
         chatView.setOnSentMessageListener(new ChatView.OnSentMessageListener() {
             @Override
             public boolean sendMessage(ChatMessage chatMessage) {
@@ -108,6 +114,9 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.acount_btn:
+                break;
+            case R.id.iv_end_chat:
+                Toast.makeText(getActivity(), "hii", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -173,14 +182,21 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
                     chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.RECEIVED, request.getRequest_patient()));
                 } else {
                     chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.SENT, "شما"));
-
-
                 }
             }
-
-
         }
 
+    public void endChat() {
+        showLoading_base();
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("request_key", request.getRequest_id());
 
-
+        ConnectToServer.any_send(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) throws JSONException {
+                hideLoading_base();
+                reciveRequest(result);
+            }
+        }, param, URL_END_CHAT);
+    }
 }
