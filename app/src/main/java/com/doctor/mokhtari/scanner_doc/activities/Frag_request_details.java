@@ -204,7 +204,6 @@ public static Patient patient;
             bodyphotos.addAll(Arrays.asList(request));
             request = gson.fromJson(obj.getString("testphotos"), AddImage[].class);
             testphotos.addAll(Arrays.asList(request));
-
             JSONArray ja = obj.getJSONArray("questions");
             if (ja.length() != 0)
                 jsonObject = (JSONObject) ja.get(0);

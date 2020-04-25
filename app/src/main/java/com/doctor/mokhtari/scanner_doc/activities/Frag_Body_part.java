@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flyco.tablayout.SegmentTabLayout;
 import com.doctor.mokhtari.scanner_doc.R;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 
 public class Frag_Body_part extends myFragment {
@@ -67,7 +69,7 @@ public class Frag_Body_part extends myFragment {
         fragment_body_part=getActivity();
        getActivity(). setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
-
+        Toasty.info(getActivity(), "برای نمایش نقاط صفحه را لمس نمایید", Toast.LENGTH_SHORT, true).show();
 
         initViews(savedInstanceState);
 

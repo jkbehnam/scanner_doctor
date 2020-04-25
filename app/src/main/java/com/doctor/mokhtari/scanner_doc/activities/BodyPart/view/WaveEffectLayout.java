@@ -22,9 +22,12 @@ import com.doctor.mokhtari.scanner_doc.activities.BodyPart.region.Region;
 import com.doctor.mokhtari.scanner_doc.activities.BodyPart.region.RegionParam;
 import com.doctor.mokhtari.scanner_doc.activities.BodyPart.region.RegionPathView;
 import com.doctor.mokhtari.scanner_doc.activities.BodyPart.region.RegionView;
+import com.doctor.mokhtari.scanner_doc.activities.Objects.BodyPointMain;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import static com.doctor.mokhtari.scanner_doc.activities.Frag_request_details.reqBodyPoints2;
 
 /**
  * Created by angelo on 2015/2/15.
@@ -109,47 +112,32 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
     }
 
     protected void dispatchDraw(Canvas canvas) {
-
         super.dispatchDraw(canvas);
+        if (!mShouldDoAnimation || mTargetWidth <= 0 || mTouchTarget == null || !"root".equals(mTag)) {
+            return;
+        }
+        bodyImageView = getBodyImageView();
+
+
+        refresh(regionType);
+        mRevealRadius = 15;
+        this.getLocationOnScreen(mLocationInScreen);
+
+        int[] location2 = new int[2];
+        bodyImageView.getLocationOnScreen(location2);
+        int left = location2[0] - mLocationInScreen[0];
+        int top = location2[1] - mLocationInScreen[1];
+        int right = left + bodyImageView.getMeasuredWidth();
+        int bottom = top + bodyImageView.getMeasuredHeight();
         int width = this.getWidth();
         int height = this.getHeight();
 
-        canvas.drawCircle(width/2+100, height/2, 15, mPaint);
-        canvas.drawCircle(width/2+100, height/2+150, 15, mPaint);
-     /*   if (!mShouldDoAnimation || mTargetWidth <= 0 || mTouchTarget == null || !"root".equals(mTag)) {
-            return;
+        for (BodyPointMain f : reqBodyPoints2
+        ) {
+
+            canvas.drawCircle((float) (left+(right-left)*f.fx),(float)(top+(bottom-top)*f.fy), mRevealRadius, mPaint);
         }
 
-
-        mRevealRadius =15;
-
-        this.getLocationOnScreen(mLocationInScreen);
-        int[] location = new int[2];
-        mTouchTarget.getLocationOnScreen(location);
-        int left = location[0] - mLocationInScreen[0];
-        int top = location[1] - mLocationInScreen[1];
-        int right = left + mTouchTarget.getMeasuredWidth();
-        int bottom = top + mTouchTarget.getMeasuredHeight();
-
-   //     canvas.save();
-//        canvas.clipRect(left, top, right, bottom);
-//اصلاح
-
-
-
-        canvas.drawCircle(mCenterX, mCenterY, mRevealRadius, mPaint);
-        canvas.drawCircle(mCenterX+100, mCenterY+100, mRevealRadius, mPaint);
-        canvas.drawCircle(mCenterX, mCenterY+150, mRevealRadius, mPaint);
-
-  //      canvas.restore();
-
-     /*   if (mRevealRadius <= mMaxRevealRadius) {
-            postInvalidateDelayed(INVALIDATE_DURATION, left, top, right, bottom);
-        } else if (!mIsPressed) {
-            mShouldDoAnimation = false;
-            postInvalidateDelayed(INVALIDATE_DURATION, left, top, right, bottom);
-        }
-        */
     }
 
     @Override
@@ -195,9 +183,12 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
 
         int width = this.getWidth();
         int height = this.getHeight();
+//check it
+//
+// canvas.drawCircle(width/2, height/2, 15, mPaint);
+     //   canvas.drawCircle(width/2+100, height/2+150, 15, mPaint);
 
-        canvas.drawCircle(width/2, height/2, 15, mPaint);
-        canvas.drawCircle(width/2+100, height/2+150, 15, mPaint);
+
 
     }
     private View getTouchTarget(View view, int x, int y) {

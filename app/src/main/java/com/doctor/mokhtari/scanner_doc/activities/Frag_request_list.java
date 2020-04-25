@@ -82,9 +82,6 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
         mainActivity_recycle.setLayoutManager(layoutManager);
-
-        // glist.add(new requests("پشت دست", "97/3/2", "دکتر یوسفی", "دریافت پاسخ", "transaction"));
-
         reqListSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -200,6 +197,7 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
     }
 
     public void settitems(ArrayList<Request> glist) {
+
         if (glist.size() != 0) {
             tv_empty_state.setVisibility(View.GONE);
             iv_empty_state.setVisibility(View.GONE);
