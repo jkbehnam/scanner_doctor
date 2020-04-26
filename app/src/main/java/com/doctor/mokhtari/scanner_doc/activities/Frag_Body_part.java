@@ -104,6 +104,7 @@ public class Frag_Body_part extends myFragment {
         bodyWidget = new HumanBodyWidget(getActivity(), container, savedInstanceState);
         container.setRegionView(new RegionView(container, getActivity()));
 
+
         Toolbar toolbar;
         toolbar=(Toolbar)rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -111,6 +112,12 @@ public class Frag_Body_part extends myFragment {
         txttoolbar.setText("محل ضایعه");
         Typeface typeface3 = Typeface.createFromAsset(getActivity().getAssets(), "font/vazirbold.ttf");
         txttoolbar.setTypeface(typeface3, Typeface.BOLD);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((AppCompatActivity) getActivity()).onBackPressed();
+            }
+        });
         ((AppCompatActivity)getActivity()). getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity)getActivity()). getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

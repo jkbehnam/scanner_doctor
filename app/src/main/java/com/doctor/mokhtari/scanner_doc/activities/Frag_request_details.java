@@ -77,6 +77,9 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     int position;
     Request request;
     JSONObject jsonObject;
+    ArrayList<AddImage> bodyphotos=new ArrayList<>();
+    ArrayList<AddImage> testphotos=new ArrayList<>();
+
     public static ArrayList<BodyPointMain> reqBodyPoints2 = new ArrayList<>();
     public static Patient patient;
 
@@ -126,6 +129,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
                 sendDiagnosis(ReqDiagnosis.getText().toString(), ReqTreatment.getText().toString());
             }
         });
+        settitems(bodyphotos,testphotos);
         return rootView;
     }
 
@@ -214,8 +218,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         final Gson gson = builder.create();
         // final Reader data = new InputStreamReader(LoginActivity.class.getResourceAsStream("user"), "UTF-8");
         JSONObject obj = new JSONObject(response);
-        ArrayList<AddImage> bodyphotos = new ArrayList<>();
-        ArrayList<AddImage> testphotos = new ArrayList<>();
+
         try {
             AddImage[] request = gson.fromJson(obj.getString("bodyphotos"), AddImage[].class);
             bodyphotos.addAll(Arrays.asList(request));
@@ -248,7 +251,6 @@ public class Frag_request_details extends myFragment implements View.OnClickList
             public void OnCardClicked(View view, int position) {
 //                Intent intent = new Intent(getActivity(), imageSampleActivity.class);
 //                getActivity().startActivity(intent);
-
                 showphoto shortAnswerAlert = new showphoto();
                 shortAnswerAlert.init_dialog(getActivity(), (bodyphotos.get(position).getAddress()));
                 shortAnswerAlert.show();

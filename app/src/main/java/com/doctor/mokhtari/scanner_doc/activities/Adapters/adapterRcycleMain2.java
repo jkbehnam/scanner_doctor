@@ -89,7 +89,7 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.correctItem));
         } else if (data_service.getRequest_state().equals("progress")) {
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.button_magenta));
-        } else if (data_service.getRequest_state().equals("encchat")) {
+        } else if (data_service.getRequest_state().equals("endchat")) {
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.allOkButton));
             holder.cv_request.setCardBackgroundColor(ContextCompat.getColor(context, R.color.grey_20));
         }

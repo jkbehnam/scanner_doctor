@@ -1,14 +1,17 @@
 package com.doctor.mokhtari.scanner_doc.activities;
-
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -18,17 +21,21 @@ import com.doctor.mokhtari.scanner_doc.activities.Objects.chatMessage;
 import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
 import com.doctor.mokhtari.scanner_doc.activities.webservice.ConnectToServer;
 import com.doctor.mokhtari.scanner_doc.activities.webservice.VolleyCallback;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.onurkagan.ksnack_lib.Animations.Fade;
+import com.onurkagan.ksnack_lib.Animations.Slide;
+import com.onurkagan.ksnack_lib.KSnack.KSnack;
+import com.onurkagan.ksnack_lib.KSnack.KSnackBarEventListener;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.intentservice.chatui.ChatView;
@@ -54,7 +61,6 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
     // TODO: Rename and change types and number of parameters
     public static Frag_chat_ui newInstance(Request request) {
         Frag_chat_ui fragment = new Frag_chat_ui(request);
-
         return fragment;
     }
 
@@ -79,11 +85,16 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
             @Override
             public boolean sendMessage(ChatMessage chatMessage) {
                 // perform actual message sending
+                if(!request.getRequest_state().equals("endchat")){
                 sendMessageServer(chatMessage);
                 return true;
+                }
+                return false;
             }
         });
-        getMessageServer();
+
+
+        showEndedSnackbar(request.getRequest_state());
         return rootView;
     }
 
@@ -116,14 +127,13 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
             case R.id.acount_btn:
                 break;
             case R.id.iv_end_chat:
-                Toast.makeText(getActivity(), "hii", Toast.LENGTH_SHORT).show();
+                endChat();
                 break;
         }
     }
 
     private void loadFragment(Fragment fragment) {
         // load fragment
-
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
         transaction.addToBackStack(null);
@@ -198,5 +208,37 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
                 reciveRequest(result);
             }
         }, param, URL_END_CHAT);
+    }
+
+    public void showEndedSnackbar(String s){
+        if(s.equals("endchat")){
+
+        KSnack kSnack = new KSnack(getActivity());
+        kSnack
+                .setListener(new KSnackBarEventListener() { // listener
+                    @Override
+                    public void showedSnackBar() {
+                        System.out.println("Showed");
+                    }
+
+                    @Override
+                    public void stoppedSnackBar() {
+                        System.out.println("Stopped");
+                    }
+                })
+                .setAction("Text", new View.OnClickListener() { // name and clicklistener
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println("Your action !");
+                    }
+                })
+                .setMessage("مکالمه به درخواست شما با پایان رسیده است") // message
+                .setTextColor(R.color.white) // message text color
+                .setBackColor(R.color.red_600) // background color
+                .setButtonTextColor(R.color.white) // action button text color
+                .setAnimation(Slide.Up.getAnimation(kSnack.getSnackView()), Slide.Down.getAnimation(kSnack.getSnackView()))
+                .setDuration(4000) // you can use for auto close.
+                .show();
+        }
     }
 }
