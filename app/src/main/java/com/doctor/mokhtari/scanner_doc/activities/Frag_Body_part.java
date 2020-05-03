@@ -24,6 +24,7 @@ import com.doctor.mokhtari.scanner_doc.activities.BodyPart.region.RegionView;
 import com.doctor.mokhtari.scanner_doc.activities.BodyPart.view.HumanBodyWidget;
 import com.doctor.mokhtari.scanner_doc.activities.BodyPart.view.WaveEffectLayout;
 import com.doctor.mokhtari.scanner_doc.activities.base.myFragment;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 
 import java.util.ArrayList;
 
@@ -40,12 +41,12 @@ public class Frag_Body_part extends myFragment {
     SegmentTabLayout segmentTabLayout;
 
     public static FragmentActivity fragment_body_part;
-    private WaveEffectLayout container;
-    private HumanBodyWidget bodyWidget;
-    private ImageView manIv, womanIv;
-    private TextView manTv, womanTv, flipFrontTv, flipBackTv;
-    private String[] mTitles = {"جلو","پشت" };
-    private ArrayList<MyTouchListener> mTouchListeners = new ArrayList<>();
+    public static WaveEffectLayout container;
+    public HumanBodyWidget bodyWidget;
+    public ImageView manIv, womanIv;
+    public TextView manTv, womanTv, flipFrontTv, flipBackTv;
+    public String[] mTitles = {"جلو","پشت" };
+    public ArrayList<MyTouchListener> mTouchListeners = new ArrayList<>();
 
     // TODO: Rename and change types and number of parameters
     public static Frag_Body_part newInstance() {
@@ -101,6 +102,37 @@ public class Frag_Body_part extends myFragment {
         flipFrontTv = (TextView)rootView.findViewById(R.id.flipFront);
         flipBackTv = (TextView)rootView. findViewById(R.id.flipBack);
         segmentTabLayout.setTabData(mTitles);
+
+        segmentTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+
+                switch (position){
+                    case 0:
+                        if(bodyWidget.flipBody(false)) {
+                            flipFrontTv.setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
+                            flipBackTv.setBackgroundColor(Color.TRANSPARENT);
+                            flipFrontTv.setTextColor(Color.WHITE);
+                            flipBackTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
+                        }
+                        break;
+                    case 1:
+                        if(bodyWidget.flipBody(true)) {
+                            flipFrontTv.setBackgroundColor(Color.TRANSPARENT);
+                            flipBackTv.setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
+                            flipFrontTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
+                            flipBackTv.setTextColor(Color.WHITE);
+                        }
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+
         bodyWidget = new HumanBodyWidget(getActivity(), container, savedInstanceState);
         container.setRegionView(new RegionView(container, getActivity()));
 

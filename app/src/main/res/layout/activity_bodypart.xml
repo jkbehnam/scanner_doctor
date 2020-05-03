@@ -179,7 +179,6 @@
             android:id="@+id/t2"
             android:layout_width="200dp"
             android:layout_height="48dp"
-android:visibility="invisible"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_gravity="center_vertical"

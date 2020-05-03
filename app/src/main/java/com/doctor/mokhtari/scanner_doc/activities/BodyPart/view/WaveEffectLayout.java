@@ -27,6 +27,7 @@ import com.doctor.mokhtari.scanner_doc.activities.Objects.BodyPointMain;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static com.doctor.mokhtari.scanner_doc.activities.BodyPart.view.HumanBodyWidget.body3;
 import static com.doctor.mokhtari.scanner_doc.activities.Frag_request_details.reqBodyPoints2;
 
 /**
@@ -46,7 +47,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
     private float mCenterX;
     private float mCenterY;
     private int[] mLocationInScreen = new int[2];
-
+    public static int[] location_copy3 = null;
     private boolean mShouldDoAnimation = false;
     private boolean mIsPressed = false;
     private String mTag;
@@ -114,10 +115,41 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         if (!mShouldDoAnimation || mTargetWidth <= 0 || mTouchTarget == null || !"root".equals(mTag)) {
+            ImageView imageView = body3;
+            if (imageView != null) {
+
+
+                // bodyImageView = getBodyImageView();
+                mRevealRadius = 15;
+                this.getLocationOnScreen(mLocationInScreen);
+
+                int[] location2 = new int[2];
+                imageView.getLocationOnScreen(location2);
+                if (location2[1] < location2[0]) {
+                    location2=location_copy3;
+                } else {
+                    location_copy3 = location2;
+                }
+
+
+                if (location2[0] != 0 && location2[1] != 0) {
+                    int left = location2[0] - mLocationInScreen[0];
+                    int top = location2[1] - mLocationInScreen[1];
+                    int right = left + imageView.getMeasuredWidth();
+                    int bottom = top + imageView.getMeasuredHeight();
+
+
+                    for (BodyPointMain f : reqBodyPoints2
+                    ) {
+                        if (HumanBodyWidget.mShowingBack == f.mShowingBack)
+                            canvas.drawCircle((float) (left + (right - left) * f.fx), (float) (top + (bottom - top) * f.fy), mRevealRadius, mPaint);
+                    }
+                }
+
+            }
             return;
         }
         bodyImageView = getBodyImageView();
-
 
         refresh(regionType);
         mRevealRadius = 15;
@@ -134,11 +166,13 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
 
         for (BodyPointMain f : reqBodyPoints2
         ) {
-
-            canvas.drawCircle((float) (left+(right-left)*f.fx),(float)(top+(bottom-top)*f.fy), mRevealRadius, mPaint);
+            if (HumanBodyWidget.mShowingBack == f.mShowingBack)
+                canvas.drawCircle((float) (left+(right-left)*f.fx),(float)(top+(bottom-top)*f.fy), mRevealRadius, mPaint);
         }
 
+
     }
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -154,7 +188,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
            //     touchTarget.performClick();
          //       return super.dispatchTouchEvent(event);
             }
-         //   bodyImageView = getBodyImageView();
+            bodyImageView = getBodyImageView();
 
 
           //  refresh(regionType);
@@ -183,6 +217,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
 
         int width = this.getWidth();
         int height = this.getHeight();
+
 //check it
 //
 // canvas.drawCircle(width/2, height/2, 15, mPaint);
@@ -222,7 +257,6 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
     }
 
     private boolean isTouchPointInView(View view, int x, int y) {
-
 
         int[] location = new int[2];
         view.getLocationOnScreen(location);
@@ -297,9 +331,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
                 initLocationForRegion(regions[i], middleAlignmentX);
             }
         }
-
         initLocationForRegion(Region.SKIN, middleAlignmentX);
-
     }
 
     private void initLocationForRegion(Region region, int middleAlignmentX){
