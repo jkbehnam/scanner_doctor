@@ -60,7 +60,7 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
         ButterKnife.bind(this, rootView);
 
         setFragmentActivity(getActivity());
-        setToolbar_notmain(rootView, "ارتباط با پزشک");
+        setToolbar_notmain(rootView, "ارتباط با بیمار");
 
         //  ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         //   ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);

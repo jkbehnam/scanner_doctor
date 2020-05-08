@@ -42,6 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.doctor.mokhtari.scanner_doc.activities.webservice.URLs.URL_GET_REQUEST_DETAIL;
+import static com.doctor.mokhtari.scanner_doc.activities.webservice.URLs.URL_RESHOT;
 import static com.doctor.mokhtari.scanner_doc.activities.webservice.URLs.URL_SEND_DIAGNOSIS;
 import static com.yalantis.ucrop.UCropFragment.TAG;
 
@@ -74,6 +75,10 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     EditText ReqDiagnosis;
     @BindView(R.id.ReqTreatment)
     EditText ReqTreatment;
+    @BindView(R.id.retryPhotoExam)
+    TextView retryPhotoExam;
+    @BindView(R.id.retryPhoto)
+    TextView retryPhoto;
     int position;
     Request request;
     JSONObject jsonObject;
@@ -118,6 +123,9 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         tv_body_part.setOnClickListener(this::onClick);
         ReqQuestions.setOnClickListener(this);
         ReqChat.setOnClickListener(this);
+        retryPhotoExam.setOnClickListener(this);
+        retryPhoto.setOnClickListener(this);
+
         ReqDiagnosis.setText(request.getDiagnosis());
         ReqTreatment.setText(request.getTreatment());
 
@@ -180,9 +188,28 @@ public class Frag_request_details extends myFragment implements View.OnClickList
             case R.id.ReqChat:
                 loadFragment(Frag_chat_ui.newInstance(request));
                 break;
+            case R.id.retryPhoto:
+                reshot("body");
+                break;
+            case R.id.retryPhotoExam:
+                reshot("test");
+                break;
         }
     }
-
+    public void reshot(String type) {
+        showLoading_base();
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("request_key", request.getRequest_id());
+        param.put("type", type);
+        ConnectToServer.any_send(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) throws JSONException {
+                hideLoading_base();
+                Toast.makeText(getActivity(), "امکان ارسال تصویر مجدد برای بیمار فعال شد", Toast.LENGTH_SHORT).show();
+                // reciveRequest(result);
+            }
+        }, param, URL_RESHOT);
+    }
     private void loadProfile(String url) {
         Log.d(TAG, "Image cache path: " + url);
         Toast.makeText(getActivity(), url, Toast.LENGTH_SHORT).show();
@@ -242,9 +269,9 @@ public class Frag_request_details extends myFragment implements View.OnClickList
 
 
         madapter = new adapterShowPhoto(bodyphotos);
-        test_img_recycle.setAdapter(madapter);
+        scan_img_recycle.setAdapter(madapter);
         madapter2 = new adapterShowPhoto(testphotos);
-        scan_img_recycle.setAdapter(madapter2);
+        test_img_recycle.setAdapter(madapter2);
 
         madapter.setOnCardClickListner(new adapterShowPhoto.OnCardClickListner() {
             @Override

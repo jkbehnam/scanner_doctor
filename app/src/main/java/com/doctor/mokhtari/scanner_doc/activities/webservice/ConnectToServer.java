@@ -2,7 +2,6 @@ package com.doctor.mokhtari.scanner_doc.activities.webservice;
 
 import android.content.Context;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NetworkResponse;
@@ -15,14 +14,9 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-
-
 import org.json.JSONException;
-
 import java.util.Map;
-
 import static com.doctor.mokhtari.scanner_doc.activities.base.Application.homecontext;
-
 
 public class ConnectToServer {
 
@@ -50,28 +44,10 @@ public class ConnectToServer {
                         error.getMessage();
                     }
                 }) {
-
-            /*
-             * If you want to add more parameters with the image
-             * you can do it here
-             * here we have only one parameter with the image
-             * which is tags
-             * */
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
-
-
-
-
-
                 return params;
             }
-
-            /*
-             * Here we are passing image by renaming it with a unique name
-             * */
-
         };
         volleyMultipartRequest.setRetryPolicy(new RetryPolicy() {
             @Override
@@ -93,22 +69,25 @@ public class ConnectToServer {
         Volley.newRequestQueue(homecontext).add(volleyMultipartRequest);
     }
     public static void show_error_warning(VolleyError error, Context context) {
-
         String message = null;
         if (error instanceof NetworkError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+            //  message = "Cannot connect to Internet...Please check your connection!";
+            message = "اشکار در اتصال به اینترنت...لطفا وضعیت اتصال خود را بررسی کنید";
         } else if (error instanceof ServerError) {
-            message = "The server could not be found. Please try again after some time!!";
+            //   message = "The server could not be found. Please try again after some time!!";
+            message = "سرور یافت نشد. لطفا بهد از چند لحظه دوباره تلاش کنید";
         } else if (error instanceof AuthFailureError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+            // message = "Cannot connect to Internet...Please check your connection!";
+            message = "اشکار در اتصال به اینترنت...لطفا وضعیت اتصال خود را بررسی کنید";
         } else if (error instanceof ParseError) {
-            message = "Parsing error! Please try again after some time!!";
+            // message = "Parsing error! Please try again after some time!!";
+            message = "اشکار در اتصال به اینترنت...لطفا وضعیت اتصال خود را بررسی کنید";
         } else if (error instanceof NoConnectionError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+            message = "اشکار در اتصال به اینترنت...لطفا وضعیت اتصال خود را بررسی کنید";
         } else if (error instanceof TimeoutError) {
-            message = "Connection TimeOut! Please check your internet connection.";
+            // message = "Connection TimeOut! Please check your internet connection.";
+            message = "اشکار در اتصال به اینترنت...لطفا وضعیت اتصال خود را بررسی کنید";
         }
-
 
          Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 

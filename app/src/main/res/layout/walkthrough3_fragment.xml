@@ -16,7 +16,6 @@
             android:scaleType="centerCrop"
             android:layout_width="230dp"
 
-            android:src="@drawable/skin_desise1"
             android:layout_height="230dp" />
 
         <LinearLayout

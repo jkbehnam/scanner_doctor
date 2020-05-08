@@ -138,7 +138,6 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
                     int right = left + imageView.getMeasuredWidth();
                     int bottom = top + imageView.getMeasuredHeight();
 
-
                     for (BodyPointMain f : reqBodyPoints2
                     ) {
                         if (HumanBodyWidget.mShowingBack == f.mShowingBack)

@@ -35,7 +35,7 @@ android:layoutDirection="rtl"
                     android:layout_height="match_parent"
                     android:scaleType="fitStart"
 
-                    android:src="@drawable/skin"
+
 
 
                     />
