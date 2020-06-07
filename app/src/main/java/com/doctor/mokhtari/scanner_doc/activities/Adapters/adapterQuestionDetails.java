@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.doctor.mokhtari.scanner_doc.activities.utils.Utils.getRequestQues;
-
+import static com.doctor.mokhtari.scanner_doc.activities.Frag_request_details.patient;
 
 /**
  * Created by behnam_b on 7/5/2016.
@@ -82,13 +82,21 @@ TextView item_datail;
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final ReqQuestions data_service = data_services_list.get(position);
 
-        holder.item_name.setText(ql[position]);
-        holder.item_datail.setText(getRequestQues(data_service.getYNQ())+"\n"+data_service.getDesc());
-        ColorMatrix matrix = new ColorMatrix();
-        matrix.setSaturation(0);
+        if (!(position == 5 && patient.getGender().equals("مرد"))) {
+            holder.item_name.setText(ql[position]);
+            holder.item_datail.setText(getRequestQues(data_service.getYNQ()) + "\n" + data_service.getDesc());
+            ColorMatrix matrix = new ColorMatrix();
+            matrix.setSaturation(0);
+            ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        } else {
+            holder.item_name.setText("");
+            holder.item_datail.setText("");
+        }
 
-        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        if(position==7){
+            holder.item_datail.setText(data_service.getDesc());
 
+        }
        // holder.iv.setImageResource(R.drawable.transaction);
      //   Glide.with(context).load(getImage(data_service.getImg())).into(holder.iv);
 
